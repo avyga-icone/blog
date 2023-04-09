@@ -1,6 +1,7 @@
 ---
 import { CollectionEntry, getCollection } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
+import Layout from '../../layouts/MainLayout.astro';
+import BlogCard from '../../components/blog/card.astro';
 // import { useSanityClient } from 'astro-sanity';
 // import PortableText from '../../components/PortableText.astro';
 
@@ -31,7 +32,115 @@ const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BlogPost {...post.data}>
-	<h1>{post.data.title}</h1>
-	<Content />
-</BlogPost>
+<Layout description="" title="">
+	<section class="my-20 lg:mb-28 ">
+		<div class="container mx-auto w-full px-7">
+			<div class="2xl:px-20">
+				<span class="inline-block uppercase text-sm font-semibold mb-5 tracking-wide group hover:text-opacity-60 text-black">
+					<a href="#">
+						<svg class="w-5 hidden lg:inline-block group-hover:text-secondary-600 transition group-hover:-translate-x-2 ease-in-out" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" color="#000"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+						Blog
+					</a>
+				</span>
+				<h1 class="font-semibold tracking-tight leading-none text-5xl">Hey Siri: Download the new MailerSend iOS app!</h1>
+				<div class="flex flex-wrap gap-2.5 mt-6">
+					<div class="flex items-center space-x-2">
+						<img src="https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d" class="w-6 h-6 rounded" alt="">
+						<span>Agathe Brusset</span>
+					</div>
+					<span>·</span>
+					<span>6 min read</span>
+					<span>
+						<a href="/" class="hover:underline">
+							New features and updates
+						</a>
+					</span>
+					<span>·</span>
+					<span>March 29th, 2023</span>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="mb-16 -mt-4">
+		<div class="container mx-auto w-full px-7">
+			<div class="2xl:px-20">
+				<img src="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=2048&s=480d0cc467c3f394ec886a5939eab23f"
+				width="2048"
+				height="1536"
+				class="w-full rounded-lg max-w-full h-auto"
+				alt="">
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container mx-auto w-full px-7">
+			<div class="2xl:px-20 min-h-screen lg:grid lg:grid-cols-9 gap-16 xl:gap-12">
+				<div class="xl:col-span-2 lg:col-span-3 hidden lg:block">
+
+				</div>
+				<div class="xl:col-span-5 lg:col-span-6">
+					<div class="bard text-lg">
+						<div class="intro">
+							Accessing key metrics and managing critical settings doesn’t have to be limited to your laptop or PC. You can now take your MailerSend account on the go with the new iOS app!
+						</div>
+						<p class="mb-10">
+							As well as shiny new features and functionality, we know that how you access and control your account is super important for your MailerSend experience. And that’s why we’re so happy to introduce you to 
+						</p>
+						<p class="mb-10">
+							Transactional email is a key element in the customer journey. With the ability to check key metrics and manage domains from the palm of your hand, you’ll have peace of mind that your emails are running smoothly at all times. Plus, you won’t need to waste time getting to your office or pulling out your laptop when you’re on the move. Simply check the app on your iOS device!
+						</p>
+						<p class="mb-10">
+							Let’s take a look at what you can do on the app.
+						</p>
+						<div class="rounded-md bg-primary-100">
+
+						</div>
+					</div>
+					<div>
+						<div class="py-10 border-t-2 border-b-2">
+							<div class="flex flex-col md:flex-row gap-6">
+								<img src="https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d" class="rounded-lg w-24 h-24" alt="">
+								<div class="text-base">
+									<b class="block mb-2 text-lg">Agathe Brusset</b>
+									<div class="pb-2">
+										I'm Agathe, Product Manager at MailerSend. When I'm not busy rolling out new product features, I'm planning my future mud-brick farmhouse complete with farm animals and a vineyard!
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="flex justify-between mt-20 mb-12">
+							<h2 class="mb-0">Next up in Blog</h2>
+							<a href="/" class="flex items-center hover:underline">
+								Show All
+							</a>
+						</div>
+						<div class="grid md:grid-cols-2 gap-x-12 gap-16 lg:gap-y-20">
+							<div>
+								<div class="group">
+									<div class="col-xl-8">
+										<BlogCard
+										image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1lbWFpbC1kbnMtcmVjb3Jkcy1mZWF0dXJlLW1pbi5qcGc=?w=640&h=420&s=8fd54371e95fb02827f50b25db889f64"
+										withDescription={false}
+										/>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div class="group">
+									<div class="col-xl-8">
+										<BlogCard
+										image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvMTQtdHJhbnNhY3Rpb25hbC1lbWFpbC1leGFtcGxlcy10by1nZXQteW91LWluc3BpcmVkLmpwZw==?w=640&h=420&s=738ad5f18726a3d9fe8bad9f189299ba"
+										withDescription={false}
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

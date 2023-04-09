@@ -59,3 +59,16 @@ blockquote {
 	margin: 0px;
 	font-style: italic;
 }
+.bard .intro {
+	font-size: 1.5rem;
+	line-height: 2rem;
+	margin-bottom: 2.5rem
+}
+
+.bard .intro:first-child:first-letter {
+	float: left;
+	font-size: 4.5rem;
+	font-weight: 700;
+	line-height: 4rem;
+	margin-right: .5rem
+}
