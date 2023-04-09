@@ -3,20 +3,21 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
-
-// import sanity from "astro-sanity";
+import sanity from "astro-sanity";
+import i18n from "astro-i18n"
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
   integrations: [
     mdx(), 
+    i18n(),
     sitemap(), svelte(), tailwind(),
-    // sanity({
-    //   projectId: 'YOUR_PROJECT_ID',
-    //   dataset: 'YOUR_DATASET_NAME',
-    //   apiVersion: '2023-02-08',
-    //   useCdn: false,
-    // })
+    sanity({
+      projectId: '7bqqhdtu',
+      dataset: 'developement',
+      apiVersion: '2023-02-08',
+      useCdn: false,
+    })
   ]
 });

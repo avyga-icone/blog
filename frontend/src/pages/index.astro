@@ -2,6 +2,13 @@
 import Layout from '../layouts/MainLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BlogCard from '../components/blog/card.astro';
+import { astroI18n, t } from "astro-i18n"
+
+
+// import { useSanityClient } from 'astro-sanity';
+astroI18n.init(Astro)
+// const posts = await useSanityClient().fetch(`*[_type == "post"]`);
+// console.log(posts, 'posts')
 ---
 <Layout
 title={SITE_TITLE} 
@@ -10,7 +17,7 @@ description={SITE_DESCRIPTION}
 	<section class="my-20 lg:mb-28 ">
 		<div class="container mx-auto w-full px-7">
 			<div class="2xl:px-20">
-				<h1 class="font-bold text-2xl md:text-3xl lg:text-5xl">Avyga blog</h1>
+				<h1 class="font-bold text-2xl md:text-3xl lg:text-5xl">Avyga blog {t('home')} {t('index.test')}</h1>
 				<nav class="flex flex-wrap mt-6">
 					<a href="/" class="border-2 rounded-md text-black tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 bg-opacity-75 border-transparent ">Latest posts</a>
 					<a href="/" class="border-2 rounded-md text-black tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
