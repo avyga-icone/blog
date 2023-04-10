@@ -3,18 +3,18 @@
 import { urlForImage } from '../../sanity/urlForImage'
 export interface Props {
 	image: string;
-  title?: string,
-  category?: string;
+  title: string;
+  slug: string;
+  category: string;
   categorySlug?: string;
-  publishDate?: string;
-  withDescription?: boolean
+  publishDate: string;
 }
 
 
-const { image, title, category, categorySlug, publishDate, withDescription = true } = Astro.props;
+const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
 ---
 <div class="relative">
-  <a href="/blog/test" class="relative">
+  <a href={`/blog/${slug}`} class="relative">
     <img src={image} alt="" class="rounded-lg mb-0 object-cover w-full h-96">
     <div class="absolute bottom-4 left-4">
       <div class="border border-white rounded-xl px-2 py-0.5 text-sm text-white font-bold">
