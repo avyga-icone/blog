@@ -3,11 +3,11 @@ import Layout from '../layouts/MainLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BlogCard from '../components/blog/card.astro';
 import { astroI18n, t } from "astro-i18n"
-
-
-// import { useSanityClient } from 'astro-sanity';
+import { useSanityClient } from 'astro-sanity';
+import { getAllPostForHome } from '../sanity/queries';
 astroI18n.init(Astro)
-// const posts = await useSanityClient().fetch(`*[_type == "post"]`);
+
+// const posts = await useSanityClient().fetch(getAllPostForHome);
 // console.log(posts, 'posts')
 ---
 <Layout
@@ -28,29 +28,41 @@ description={SITE_DESCRIPTION}
 					</a>
 				</nav>
 			</div>
-			
 		</div>
 	</section>
 
 	<section>
 		<div class="container mx-auto w-full px-7">
-				<div class="2xl:px-20 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-16 lg:gap-y-20">
-					<div class="md:col-span-2 group">
-						<BlogCard
-						image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=1280&h=400&s=a87a455b0171ad4a4759c5b552efca76"
-						/>
-					</div>
-					<div class="group">
+				<div class="2xl:px-20 grid md:grid-cols-2 lg:grid-cols-8 gap-x-6 gap-6 lg:gap-y-20">
+					<div class="group md:col-span-2">
 						<div class="col-xl-8">
 							<BlogCard
 							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1lbWFpbC1kbnMtcmVjb3Jkcy1mZWF0dXJlLW1pbi5qcGc=?w=640&h=420&s=8fd54371e95fb02827f50b25db889f64"
+							category={"Lifestyle"}
+							categorySlug={"/lifestyle"}
+							title={"Hey Siri: Download the new MailerSend iOS app!"}
+							publishDate={"Avril 5, 2023"}
 							/>
 						</div>
 					</div>
-					<div class="group">
+					<div class="md:col-span-4 group">
+						<BlogCard
+						image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=1280&h=400&s=a87a455b0171ad4a4759c5b552efca76"
+						category={"Photo"}
+						categorySlug={"/photo"}
+						title={"Hey Siri: Download the new MailerSend iOS app!"}
+						publishDate={"Avril 5, 2023"}
+						/>
+					</div>
+					
+					<div class="group md:col-span-2">
 						<div class="col-xl-8">
 							<BlogCard
 							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvMTQtdHJhbnNhY3Rpb25hbC1lbWFpbC1leGFtcGxlcy10by1nZXQteW91LWluc3BpcmVkLmpwZw==?w=640&h=420&s=738ad5f18726a3d9fe8bad9f189299ba"
+							category={"Car and trucks"}
+							categorySlug={"/lifestyle"}
+							title={"Hey Siri: Download the new MailerSend iOS app!"}
+							publishDate={"Avril 5, 2023"}
 							/>
 						</div>
 					</div>
