@@ -9,6 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'slug',
@@ -18,6 +19,7 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'author',
@@ -32,12 +34,20 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: Rule => Rule.required()
     }),
     defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: {type: 'category'}}],
+      validation: Rule => Rule.required()
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'tag'}}],
     }),
     defineField({
       name: 'publishedAt',
@@ -45,9 +55,16 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'intro',
+      title: 'Intro',
+      type: 'text',
+      validation: Rule => Rule.required()
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'localeBlockContent',
+      validation: Rule => Rule.required()
     }),
   ],
 
