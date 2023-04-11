@@ -2,13 +2,12 @@
 import Layout from '../layouts/MainLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BlogCard from '../components/blog/card.astro';
-// import { astroI18n, t } from "astro-i18n"
-// import { useSanityClient } from 'astro-sanity';
-// import { getAllPostForHome } from '../sanity/queries';
-// astroI18n.init(Astro)
+import { astroI18n, t } from "astro-i18n"
+import { useSanityClient } from 'astro-sanity';
+import { getAllPostForHome, Post } from '../sanity';
+astroI18n.init(Astro)
 
-// const posts = await useSanityClient().fetch(getAllPostForHome);
-// console.log(posts, 'posts')
+const posts = await useSanityClient().fetch(getAllPostForHome) as Post[];
 ---
 <Layout
 title={SITE_TITLE} 
@@ -17,13 +16,13 @@ description={SITE_DESCRIPTION}
 	<section class="my-10 md:my-20 lg:mb-28 ">
 		<div class="container mx-auto w-full px-7">
 			<div class="2xl:px-20">
-				<h1 class="font-bold text-2xl md:text-3xl lg:text-5xl">Avyga blog</h1>
+				<h1 class="font-bold text-2xl md:text-3xl lg:text-5xl text-gray-900 dark:text-gray-100">Avyga blog</h1>
 				<nav class="flex flex-wrap mt-4 md:mt-6">
-					<a href="/" class="border-2 rounded-md text-black tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 bg-opacity-75 border-transparent ">Latest posts</a>
-					<a href="/" class="border-2 rounded-md text-black tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
+					<a href="/" class="border-2 rounded-md tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 dark:bg-gray-700 bg-opacity-75 border-transparent text-black dark:text-gray-100">Latest posts</a>
+					<a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
 						New features and updates
 					</a>
-					<a href="/" class="border-2 rounded-md text-black tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
+					<a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
 						Tips and resources
 					</a>
 				</nav>
@@ -34,110 +33,20 @@ description={SITE_DESCRIPTION}
 	<section>
 		<div class="container mx-auto w-full px-7">
 				<div class="2xl:px-20 grid md:grid-cols-2 lg:grid-cols-8 gap-x-6 gap-6 lg:gap-y-20">
-					
-					<div class="md:col-span-4 group">
-						<BlogCard
-						image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=1280&h=400&s=a87a455b0171ad4a4759c5b552efca76"
-						category={"Photo"}
-						slug={"using-mdx"}
-						categorySlug={"/photo"}
-						title={"Hey Siri: Download the new MailerSend iOS app!"}
-						publishDate={"Avril 5, 2023"}
-						/>
-					</div>
-					<div class="group md:col-span-2">
-						<div class="col-xl-8">
-							<BlogCard
-							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvMTQtdHJhbnNhY3Rpb25hbC1lbWFpbC1leGFtcGxlcy10by1nZXQteW91LWluc3BpcmVkLmpwZw==?w=640&h=420&s=738ad5f18726a3d9fe8bad9f189299ba"
-							category={"Car and trucks"}
-							categorySlug={"/lifestyle"}
-							title={"Hey Siri: Download the new MailerSend iOS app!"}
-							slug={"using-mdx"}
-							publishDate={"Avril 5, 2023"}
-							/>
-						</div>
-					</div>
-					<div class="group md:col-span-2">
-						<div class="col-xl-8">
-							<BlogCard
-							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1lbWFpbC1kbnMtcmVjb3Jkcy1mZWF0dXJlLW1pbi5qcGc=?w=640&h=420&s=8fd54371e95fb02827f50b25db889f64"
-							category={"Lifestyle"}
-							categorySlug={"/lifestyle"}
-							slug={"using-mdx"}
-							title={"Hey Siri: Download the new MailerSend iOS app!"}
-							publishDate={"Avril 5, 2023"}
-							/>
-						</div>
-					</div>
-					<div class="group md:col-span-2">
-						<div class="col-xl-8">
-							<BlogCard
-							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1lbWFpbC1kbnMtcmVjb3Jkcy1mZWF0dXJlLW1pbi5qcGc=?w=640&h=420&s=8fd54371e95fb02827f50b25db889f64"
-							category={"Lifestyle"}
-							categorySlug={"/lifestyle"}
-							title={"Hey Siri: Download the new MailerSend iOS app!"}
-							publishDate={"Avril 5, 2023"}
-							slug={"using-mdx"}
-							/>
-						</div>
-					</div>
-					<div class="md:col-span-4 group">
-						<BlogCard
-						image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=1280&h=400&s=a87a455b0171ad4a4759c5b552efca76"
-						category={"Photo"}
-						categorySlug={"/photo"}
-						title={"Hey Siri: Download the new MailerSend iOS app!"}
-						publishDate={"Avril 5, 2023"}
-						slug={"using-mdx"}
-						/>
-					</div>
-					
-					<div class="group md:col-span-2">
-						<div class="col-xl-8">
-							<BlogCard
-							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvMTQtdHJhbnNhY3Rpb25hbC1lbWFpbC1leGFtcGxlcy10by1nZXQteW91LWluc3BpcmVkLmpwZw==?w=640&h=420&s=738ad5f18726a3d9fe8bad9f189299ba"
-							category={"Car and trucks"}
-							categorySlug={"/lifestyle"}
-							title={"Hey Siri: Download the new MailerSend iOS app!"}
-							publishDate={"Avril 5, 2023"}
-							slug={"using-mdx"}
-							/>
-						</div>
-					</div>
-					<div class="group md:col-span-2">
-						<div class="col-xl-8">
-							<BlogCard
-							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1lbWFpbC1kbnMtcmVjb3Jkcy1mZWF0dXJlLW1pbi5qcGc=?w=640&h=420&s=8fd54371e95fb02827f50b25db889f64"
-							category={"Lifestyle"}
-							categorySlug={"/lifestyle"}
-							title={"Hey Siri: Download the new MailerSend iOS app!"}
-							publishDate={"Avril 5, 2023"}
-							slug={"using-mdx"}
-							/>
-						</div>
-					</div>		
-					<div class="group md:col-span-2">
-						<div class="col-xl-8">
-							<BlogCard
-							image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvMTQtdHJhbnNhY3Rpb25hbC1lbWFpbC1leGFtcGxlcy10by1nZXQteW91LWluc3BpcmVkLmpwZw==?w=640&h=420&s=738ad5f18726a3d9fe8bad9f189299ba"
-							slug={"using-mdx"}
-							category={"Car and trucks"}
-							categorySlug={"/lifestyle"}
-							title={"Hey Siri: Download the new MailerSend iOS app!"}
-							publishDate={"Avril 5, 2023"}
-							/>
-						</div>
-					</div>
-					<div class="md:col-span-4 group">
-						<BlogCard
-						image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=1280&h=400&s=a87a455b0171ad4a4759c5b552efca76"
-						category={"Photo"}
-						slug={"using-mdx"}
-						categorySlug={"/photo"}
-						title={"Hey Siri: Download the new MailerSend iOS app!"}
-						publishDate={"Avril 5, 2023"}
-						/>
-					</div>
+					{posts.map((post, i) => { 
+						return (
+							<div class:list={['group', {'md:col-span-4': i % 4 === 0}, { "md:col-span-2": i % 4 !== 0}]}>
+								<BlogCard
+								image={post.mainImage}
+								category={post.categories[0].title}
+								slug={post.slug}
+								categorySlug={post.categories[0].slug}
+								title={post.title}
+								publishDate={post.publishedAt}
+								/>
+							</div>
+						)
+					})}
 				</div>
 	
 		</div>

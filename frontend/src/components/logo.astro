@@ -1,14 +1,17 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+---
+export interface Props {
+	className?: string
+}
+
+const { className } = Astro.props;
+
+---
+
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+class:list={['logo', { [className as string]: !!className } ]}
  width="300.000000pt" height="81.000000pt" viewBox="0 0 300.000000 81.000000"
  preserveAspectRatio="xMidYMid meet">
-<metadata>
-Created by potrace 1.10, written by Peter Selinger 2001-2011
-</metadata>
-<g transform="translate(0.000000,81.000000) scale(0.100000,-0.100000)"
-fill="#fff" stroke="none">
+<g transform="translate(0.000000,81.000000) scale(0.100000,-0.100000)"  stroke="none">
 <path d="M670 758 c1 -15 2 -17 104 -283 42 -110 96 -248 118 -307 23 -60 44
 -108 48 -108 4 0 12 12 18 28 32 84 98 255 147 380 30 78 55 147 55 152 0 6
 -26 10 -59 10 l-58 0 -22 -62 c-72 -204 -85 -224 -104 -162 -10 34 -52 151

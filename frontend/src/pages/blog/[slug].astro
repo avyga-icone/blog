@@ -2,14 +2,12 @@
 import Layout from '../../layouts/MainLayout.astro';
 import BlogCard from '../../components/blog/card.astro';
 import { useSanityClient } from 'astro-sanity';
-import { getAllPostForPage, urlForImage, sanityPortableText } from '../../sanity';
-import { Post } from '../../../types';
+import { urlForImage, sanityPortableText, PostAndRecommend, getAllPostAndRecommended } from '../../sanity';
 import Avatar from '../../components/avatar.astro';
-// import PortableText from '../../components/PortableText.astro';
-// 15-transactional-email-examples-to-get-you-inspired
+
 export async function getStaticPaths() {
-  const posts = await useSanityClient().fetch(getAllPostForPage);
-	console.log(posts, 'posts')
+  const posts = await useSanityClient().fetch(getAllPostAndRecommended);
+
   return posts.map((post) => {
     return {
       params: {
@@ -20,10 +18,9 @@ export async function getStaticPaths() {
   });
 
 }
-type Props = { post: Post }
-// const { title, body } = Astro.props;
+type Props = { post: PostAndRecommend  }
 const { post } = Astro.props;
-console.log(post, 'post')
+
 ---
 
 <Layout description="" title="">
@@ -31,17 +28,17 @@ console.log(post, 'post')
 		<div class="container mx-auto w-full px-7">
 			<div class="2xl:px-20">
 				<span class="inline-block uppercase text-sm font-semibold mb-5 tracking-wide group hover:text-opacity-60 text-black">
-					<a href="#">
-						<svg class="w-5 hidden lg:inline-block group-hover:text-secondary-600 transition group-hover:-translate-x-2 ease-in-out" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" color="#000"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+					<a href="#" class="text-gray-900 dark:text-gray-100">
+						<svg class="w-5 hidden lg:inline-block group-hover:text-secondary-600 text-gray-900 dark:text-gray-100 transition group-hover:-translate-x-2 ease-in-out" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" color="#000"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
 						Blog
 					</a>
 				</span>
-				<h1 class="font-semibold tracking-tight leading-none text-3xl mdLtext-5xl">
+				<h1 class="font-semibold tracking-tight leading-none text-3xl md:text-5xl text-gray-900 dark:text-gray-100">
 					{post.title}
 				</h1>
-				<div class="flex flex-wrap gap-2.5 mt-6 items-center">
+				<div class="flex flex-wrap gap-2.5 mt-6 items-center text-gray-700 dark:text-gray-300">
 					<div class="flex items-center space-x-2">
-						<Avatar image={"https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d"} alt="Author profile"/>
+						<Avatar image={urlForImage(post.author.image).width(40).height(40).url()} alt="Author profile"/>
 						<span>{post.author.name}</span>
 					</div>
 					<span>·</span>
@@ -49,7 +46,7 @@ console.log(post, 'post')
 					<span>·</span> -->
 					<span>
 						<a href="/" class="hover:underline">
-							{post.category.title}
+							{post.categories[0].title}
 						</a>
 					</span>
 					<span>·</span>
@@ -76,67 +73,56 @@ console.log(post, 'post')
 
 				</div>
 				<div class="xl:col-span-5 lg:col-span-6">
-					<div class="bard text-lg">
+					<div class="bard text-lg text-gray-600 dark:text-gray-200">
 						<div class="intro">
 							{post?.intro}
 						</div>
-						<div set:html={sanityPortableText(post.body.fr)} class="prose lg:prose-xl"/>
+						<div set:html={sanityPortableText(post.body.fr)} class="prose lg:prose-xl dark:prose-invert"/>
 
 						<div class="rounded-md bg-primary-100">
 
 						</div>
 					</div>
 					<div>
-						<div class="py-10 border-t-2 border-b-2">
+						<div class="py-10 border-t-2 border-b-2 mt-8">
 							<div class="flex flex-col md:flex-row gap-6">
-								<img src="https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d" class="rounded-lg w-24 h-24" alt="">
+								<img src={urlForImage(post.author.image).width(96).height(96).url()} class="rounded-lg w-24 h-24" alt="">
 								<div class="text-base">
-									<b class="block mb-2 text-lg">{post.author.name}</b>
-									<div class="pb-2">
-										I'm Agathe, Product Manager at MailerSend. When I'm not busy rolling out new product features, I'm planning my future mud-brick farmhouse complete with farm animals and a vineyard!
+									<b class="block mb-2 text-lg text-gray-900 dark:text-gray-100">{post.author.name}</b>
+									<div class="pb-2 text-gray-700 dark:text-gray-200">
+										{post.author.bio}
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					{post?.recommended?.length > 0 ? 
 					<div>
-						<div class="flex justify-between mt-20 mb-12">
+						<div class="flex justify-between mt-20 mb-12 text-gray-800 dark:text-gray-200">
 							<h2 class="mb-0">Next up in Blog</h2>
 							<a href="/" class="flex items-center hover:underline">
 								Show All
 							</a>
 						</div>
 						<div class="grid md:grid-cols-2 gap-x-12 gap-16 lg:gap-y-20">
-							<div>
-								<div class="group">
-									<div class="col-xl-8">
-										<BlogCard
-										image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1lbWFpbC1kbnMtcmVjb3Jkcy1mZWF0dXJlLW1pbi5qcGc=?w=640&h=420&s=8fd54371e95fb02827f50b25db889f64"
-										slug={"using-mdx"}
-										category={"Lifestyle"}
-										categorySlug={"/lifestyle"}
-										title={"Hey Siri: Download the new MailerSend iOS app!"}
-										publishDate={"Avril 5, 2023"}
-										/>
+							{post?.recommended.map((post) => (
+								<div>
+									<div class="group">
+										<div class="col-xl-8">
+											<BlogCard
+											image={post.mainImage}
+											slug={post.slug}
+											category={post.categories[0].title}
+											categorySlug={post.categories[0].slug}
+											title={post.title}
+											publishDate={post.publishedAt}
+											/>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div>
-								<div class="group">
-									<div class="col-xl-8">
-										<BlogCard
-										image="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvMTQtdHJhbnNhY3Rpb25hbC1lbWFpbC1leGFtcGxlcy10by1nZXQteW91LWluc3BpcmVkLmpwZw==?w=640&h=420&s=738ad5f18726a3d9fe8bad9f189299ba"
-										slug={"using-mdx"}
-										category={"Lifestyle"}
-										categorySlug={"/lifestyle"}
-										title={"Hey Siri: Download the new MailerSend iOS app!"}
-										publishDate={"Avril 5, 2023"}
-										/>
-									</div>
-								</div>
-							</div>
+							))}
 						</div>
-					</div>
+					</div> : null}
 				</div>
 			</div>
 		</div>

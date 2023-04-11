@@ -4,24 +4,12 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 body {
-	font-family: Verdana, sans-serif;
 	text-align: left;
-	background-color: #fff;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	line-height: 1.5;
-	color: #444;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-strong,
-b {
-	color: #222;
-}
+
 nav a {
 	margin-right: 10px;
 }
@@ -58,6 +46,12 @@ blockquote {
 	padding: 2px 0px 2px 20px;
 	margin: 0px;
 	font-style: italic;
+}
+.logo{
+	fill: #000;
+}
+.dark .logo g{
+	fill: #fff;
 }
 .bard .intro {
 	font-size: 1.5rem;
