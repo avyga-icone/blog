@@ -5,32 +5,50 @@ export const getAllPostForHome = groq`*[_type == "post"]{
 	"slug": slug.current,
 	mainImage,
 	publishedAt,
-	categories{
+	"category": category->{
 		title,
 		"slug": slug.current
 	},
 }`;
 
-export const getAllPostSlug = groq`[_type == 'post']{
+export const getAllPostSlug = groq`*[_type == 'post']{
   "slug": slug.current
 }`;
 
-export const getPost = groq`[_type == 'post' && slug.current == $slug]{
+export const getAllPostForPage = groq`*[_type == "post"]{
 	title,
 	"slug": slug.current,
 	mainImage,
+	intro,
 	publishedAt,
-	"author": {
+	"author": author->{
 		name,
-		image
+		image,
 	},
-	categories{
+	body,
+	"category": category->{
 		title,
-		"slug": slug.current
+		"slug": slug.current,
 	},
-	tags{
+	"tags": tags[]->{
 		title,
-		"slug": slug.current
+		"slug": slug.current,
 	},
-
 }`
+
+// // title,
+// 	"slug": slug.current,
+// 	mainImage,
+// 	publishedAt,
+// 	"author": author->{
+// 		name,
+// 		image,
+// 	},
+// 	categories{
+// 		title,
+// 		"slug": slug.current,
+// 	},
+// 	tags{
+// 		title,
+// 		"slug": slug.current,
+// 	},

@@ -1,35 +1,29 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
 import Layout from '../../layouts/MainLayout.astro';
 import BlogCard from '../../components/blog/card.astro';
-// import { useSanityClient } from 'astro-sanity';
+import { useSanityClient } from 'astro-sanity';
+import { getAllPostForPage, urlForImage, sanityPortableText } from '../../sanity';
+import { Post } from '../../../types';
+import Avatar from '../../components/avatar.astro';
 // import PortableText from '../../components/PortableText.astro';
-
-// export async function getStaticPaths() {
-//   const posts = await useSanityClient().fetch(`*[_type == "post"]`);
-
-//   return posts.map((post) => {
-//     return {
-//       params: {
-//         slug: post.slug?.current || '',
-//       },
-//       props: { ...post },
-//     };
-//   });
-// }
-
-// const { title, body } = Astro.props;
+// 15-transactional-email-examples-to-get-you-inspired
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
-}
-type Props = CollectionEntry<'blog'>;
+  const posts = await useSanityClient().fetch(getAllPostForPage);
+	console.log(posts, 'posts')
+  return posts.map((post) => {
+    return {
+      params: {
+        slug: post?.slug || '',
+      },
+      props: { post },
+    };
+  });
 
-const post = Astro.props;
-const { Content } = await post.render();
+}
+type Props = { post: Post }
+// const { title, body } = Astro.props;
+const { post } = Astro.props;
+console.log(post, 'post')
 ---
 
 <Layout description="" title="">
@@ -42,18 +36,20 @@ const { Content } = await post.render();
 						Blog
 					</a>
 				</span>
-				<h1 class="font-semibold tracking-tight leading-none text-3xl mdLtext-5xl">Hey Siri: Download the new MailerSend iOS app!</h1>
-				<div class="flex flex-wrap gap-2.5 mt-6">
+				<h1 class="font-semibold tracking-tight leading-none text-3xl mdLtext-5xl">
+					{post.title}
+				</h1>
+				<div class="flex flex-wrap gap-2.5 mt-6 items-center">
 					<div class="flex items-center space-x-2">
-						<img src="https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d" class="w-6 h-6 rounded" alt="">
-						<span>Agathe Brusset</span>
+						<Avatar image={"https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d"} alt="Author profile"/>
+						<span>{post.author.name}</span>
 					</div>
 					<span>·</span>
 					<!-- <span>6 min read</span>
 					<span>·</span> -->
 					<span>
 						<a href="/" class="hover:underline">
-							New features and updates
+							{post.category.title}
 						</a>
 					</span>
 					<span>·</span>
@@ -65,7 +61,7 @@ const { Content } = await post.render();
 	<section class="mb-16 -mt-4">
 		<div class="container mx-auto w-full px-7">
 			<div class="2xl:px-20">
-				<img src="https://www.mailersend.com/img/asset/bWFpbi9jb3ZlcnMvYmxvZy1pb3MtZmVhdHVyZS1taW4tMTY4MDA4Mjk5MC5qcGc=?w=2048&s=480d0cc467c3f394ec886a5939eab23f"
+				<img src={urlForImage(post.mainImage).width(970).height(450).url()}
 				width="2048"
 				height="1536"
 				class="w-full rounded-lg max-w-full h-auto"
@@ -82,17 +78,10 @@ const { Content } = await post.render();
 				<div class="xl:col-span-5 lg:col-span-6">
 					<div class="bard text-lg">
 						<div class="intro">
-							Accessing key metrics and managing critical settings doesn’t have to be limited to your laptop or PC. You can now take your MailerSend account on the go with the new iOS app!
+							{post?.intro}
 						</div>
-						<p class="mb-10">
-							As well as shiny new features and functionality, we know that how you access and control your account is super important for your MailerSend experience. And that’s why we’re so happy to introduce you to 
-						</p>
-						<p class="mb-10">
-							Transactional email is a key element in the customer journey. With the ability to check key metrics and manage domains from the palm of your hand, you’ll have peace of mind that your emails are running smoothly at all times. Plus, you won’t need to waste time getting to your office or pulling out your laptop when you’re on the move. Simply check the app on your iOS device!
-						</p>
-						<p class="mb-10">
-							Let’s take a look at what you can do on the app.
-						</p>
+						<div set:html={sanityPortableText(post.body.fr)} class="prose lg:prose-xl"/>
+
 						<div class="rounded-md bg-primary-100">
 
 						</div>
@@ -102,7 +91,7 @@ const { Content } = await post.render();
 							<div class="flex flex-col md:flex-row gap-6">
 								<img src="https://www.mailersend.com/img/asset/bWFpbi91c2Vycy9hZ2F0aGVfMjEtbWluLmpwZw==?w=200&h=200&s=7fb70abf75974ffa0bc4a195c894e84d" class="rounded-lg w-24 h-24" alt="">
 								<div class="text-base">
-									<b class="block mb-2 text-lg">Agathe Brusset</b>
+									<b class="block mb-2 text-lg">{post.author.name}</b>
 									<div class="pb-2">
 										I'm Agathe, Product Manager at MailerSend. When I'm not busy rolling out new product features, I'm planning my future mud-brick farmhouse complete with farm animals and a vineyard!
 									</div>
