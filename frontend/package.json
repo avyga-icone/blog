@@ -9,8 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "i18n:sync": "astro-i18n sync",
-    "i18n:keys": "astro-i18n extract:keys"
+    "i18n:sync": "astro-i18n sync"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.2.1",

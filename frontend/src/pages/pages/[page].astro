@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import BlogCard from '../../components/blog/card.astro';
+import { astroI18n, t } from "astro-i18n"
+import { useSanityClient } from 'astro-sanity';
+import { getAllPostForHome, Post } from '../../sanity';
+astroI18n.init(Astro)
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await useSanityClient().fetch(getAllPostForHome) as Post[];
+  // Generate pages from our array of astronauts, with 2 to a page
+  return paginate(posts, { pageSize: 6 });
+}
+
+// All paginated data is passed on the "page" prop
+const { page } = Astro.props;
+---
+
+<Layout
+title={SITE_TITLE} 
+description={SITE_DESCRIPTION}
+>
+  <section class="my-10 md:my-20 lg:mb-28 ">
+    <div class="container mx-auto w-full px-7">
+      <div class="2xl:px-20">
+        <h1 class="font-bold text-2xl md:text-3xl lg:text-5xl text-gray-900 dark:text-gray-100 pb-1">Avyga blog</h1>
+        <h2 class="text-lg  text-gray-700 dark:text-gray-400 italic">Page: {page.currentPage}</h2>
+        <nav class="flex flex-wrap mt-4 md:mt-6">
+          <a href="/" class="border-2 rounded-md tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 dark:bg-gray-700 bg-opacity-75 border-transparent text-black dark:text-gray-100">New post</a>
+          <!-- <a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
+            New features and updates
+          </a>
+          <a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
+            Tips and resources
+          </a> -->
+        </nav>
+      </div>
+    </div>
+  </section>
+	<section>
+		<div class="container mx-auto w-full px-7">
+				<div class="2xl:px-20 grid md:grid-cols-2 lg:grid-cols-8 gap-x-6 gap-6 lg:gap-y-20">
+					{page.data.map((post, i) => { 
+						return (
+							<div class:list={['group', {'md:col-span-4': i % 4 === 0}, { "md:col-span-2": i % 4 !== 0}]}>
+								<BlogCard
+								image={post.mainImage}
+								category={post.categories[0].title}
+								slug={post.slug}
+								categorySlug={post.categories[0].slug}
+								title={post.title}
+								publishDate={post.publishedAt}
+								/>
+							</div>
+						)
+					})}
+				</div>
+	
+		</div>
+	</section>
+
+  <div class="mt-12 pb-8 flex items-center justify-center w-full">
+		{page.url.prev ?<a href={page.url.prev} class="inline-flex items-center px-4 py-2 mr-3 text-sm font-medium text-gray-500 bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+			<svg aria-hidden="true" class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+			{t('index.prev')}
+		</a> : null}
+
+		{page.url.next ? <a href={page.url.next} class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+			{t('index.nex')}
+			<svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+		</a> : null}
+	</div>
+</Layout>

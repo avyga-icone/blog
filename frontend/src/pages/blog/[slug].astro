@@ -4,6 +4,9 @@ import BlogCard from '../../components/blog/card.astro';
 import { useSanityClient } from 'astro-sanity';
 import { urlForImage, sanityPortableText, PostAndRecommend, getAllPostAndRecommended } from '../../sanity';
 import Avatar from '../../components/avatar.astro';
+import { astroI18n, t } from "astro-i18n";
+astroI18n.init(Astro)
+import dayjs from 'dayjs';
 
 export async function getStaticPaths() {
   const posts = await useSanityClient().fetch(getAllPostAndRecommended);
@@ -45,12 +48,12 @@ const { post } = Astro.props;
 					<!-- <span>6 min read</span>
 					<span>·</span> -->
 					<span>
-						<a href="/" class="hover:underline">
+						<a href="#" class="hover:underline">
 							{post.categories[0].title}
 						</a>
 					</span>
 					<span>·</span>
-					<span>March 29th, 2023</span>
+					<span>{dayjs(post.publishedAt).format('MMM DD, YYYY')}</span>
 				</div>
 			</div>
 		</div>
@@ -101,7 +104,7 @@ const { post } = Astro.props;
 						<div class="flex justify-between mt-20 mb-12 text-gray-800 dark:text-gray-200">
 							<h2 class="mb-0">Next up in Blog</h2>
 							<a href="/" class="flex items-center hover:underline">
-								Show All
+								{t('show-all')}
 							</a>
 						</div>
 						<div class="grid md:grid-cols-2 gap-x-12 gap-16 lg:gap-y-20">

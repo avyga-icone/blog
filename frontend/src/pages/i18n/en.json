@@ -1,4 +1,11 @@
 {
   "{route}": "Home",
-  "test": "Test en anglais" 
+  "new-post": "New posts",
+  "next": "Next",
+  "prev": "Prev",
+  "404": {
+    "index": "Page not found",
+    "message": "Sorry, we couldn't find the page you're looking for.",
+    "back": "Go back home"
+  }
 }

@@ -9,7 +9,18 @@ export const getAllPostForHome = groq`*[_type == "post"]{
 		title,
 		"slug": slug.current
 	},
-}[0...9]`;
+}`;
+
+export const getAllPostForHomePaginated = groq`*[_type == "post"]{
+	title,
+	"slug": slug.current,
+	mainImage,
+	publishedAt,
+	"categories": categories[]->{
+		title,
+		"slug": slug.current
+	},
+}[0...6]`;
 
 
 export const getAllPostAndRecommended = groq`*[_type == "post"]{
