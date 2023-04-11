@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import MetaDataSelect from '../../components/MetaDataSelect.astro';
+---
+
+<Layout
+title={SITE_TITLE} 
+description={SITE_DESCRIPTION}
+>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-6 mb-20">
+    <div class="col-span-8 lg:col-span-2 order-1 lg:order-none">
+        <MetaDataSelect
+        type="categories" 
+        name="All Categories" 
+        title="Category"
+        />
+    </div>
+    <div class="col-span-8 order-3 lg:order-none pt-4 px-2">
+
+    </div>
+  </div>
+</Layout>

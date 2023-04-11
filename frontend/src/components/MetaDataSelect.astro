@@ -1,0 +1,84 @@
+---
+  const items = [
+    {
+      name: 'test',
+      slug: "/test"
+    }
+  ]
+
+  const active = 'Categories'
+---
+
+<div class="relative inline-block w-full">
+  <div class="lg:hidden">
+      <span class="rounded-md shadow-sm">
+      <button
+      type="button"
+      id="button-metadata-select"
+      class="flex justify-between w-full rounded-sm border border-gray-300 px-4 py-3 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150"
+      id="options-menu"
+      aria-haspopup="true"
+      aria-expanded="true"
+      >
+        Super: {active}
+          <svg width="24" height="24" class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg>
+      </button>
+      </span>
+  </div>
+  <div
+  class='origin-top-left absolute lg:relative left-0 mt-2 w-full rounded-md shadow-lg lg:shadow-none z-10 mb-4 lg:block' id="metadata-selected-menu" aria-status="close">
+    <div class="rounded-sm bg-white shadow-xs lg:bg-none lg:shadow-none">
+        <div
+        role="menu"
+        aria-orientation="vertical"
+        aria-labelledby="options-menu"
+        >
+          <ul class="lg:mx-2">
+              <li
+              class='block text-sm leading-5 text-gray-700 lg:text-base lg:no-underline lg:font-bold lg:tracking-wide hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 underline'>
+                  {!active ? (
+                    <a class='block lg:inline-block px-4 py-2 lg:p-0 lg:my-2 text-xs'>
+                        {name}
+                    </a>
+                  )
+                  : (
+                  <>
+                    <a class='block lg:inline-block px-4 py-2 lg:p-0 lg:my-2 text-xs'>
+                      Category
+                    </a>
+
+                    <a class='block lg:inline-block px-4 py-2 lg:p-0 lg:my-2 text-xs'>
+                      {`/super/`}
+                    </a>
+                  </>
+                  )}
+                  
+              </li>
+              {items?.map((item, key) => ( 
+              <li
+              class='block text-sm leading-5 text-gray-700 hover:bg-gray-100 lg:hover:bg-transparent hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 underline font-bold'>
+                <a href="#" class='block lg:inline-block px-4 py-2 lg:p-0 lg:my-2'>
+                    {item.name}
+                </a>
+                
+              </li>
+              ))}             
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const button = document.getElementById("button-metadata-select")
+  button?.addEventListener('click', function(){
+    const menu = document.getElementById("metadata-selected-menu")
+    if(menu?.getAttribute('aria-status') === 'close'){
+      menu?.classList.add('hidden')
+      menu?.setAttribute('aria-status', 'open')
+    }else{
+      menu?.classList.remove('hidden')
+      menu?.setAttribute('aria-status', 'close')
+    }
+  })
+</script>
