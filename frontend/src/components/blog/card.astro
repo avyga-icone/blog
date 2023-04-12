@@ -1,13 +1,14 @@
 ---
 
-import { Image } from '../../sanity';
+import { Image, Post } from '../../sanity';
 import { urlForImage } from '../../sanity/urlForImage'
 import dayjs from 'dayjs';
+import { astroI18n } from "astro-i18n"
 export interface Props {
 	image: Image | string;
-  title: string;
+  title: Post['title'];
   slug: string;
-  category: string;
+  category: Post['categories'][0]['title'];
   categorySlug?: string;
   publishDate: string;
 }
@@ -22,9 +23,10 @@ const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
     alt={`Post poster`} 
     class="rounded-lg mb-0 object-cover w-full h-96">
     <div class="absolute bottom-4 left-4">
-      <div class="border border-white rounded-xl px-2 py-0.5 text-sm text-white font-bold">
+      <div class="border border-white rounded-xl px-2 py-0.5 text-sm text-white font-bold " 
+      style="max-width: 220px;">
         <span class="mr-0.5">·</span>
-        {category}
+        {category[astroI18n.langCode]}
       </div>
       <div class="bg-white rounded-xl px-1.5 py-0.5 text-sm mt-3 font-bold w-fit">
         {dayjs(publishDate).format('MMM DD, YYYY')}
@@ -43,10 +45,10 @@ const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
   <div class="mt-4 text-gray-900 dark:text-gray-100">
     <div class="mb-1.5 text-sm space-x-1 font-bold">
        <span>·</span>
-       <span>{category}</span>
+       <span>{category[astroI18n.langCode]}</span>
     </div>
     <h4 class="mb-1.5 group-hover:underline text-2xl font-semibold tracking-tight leading-tight">
-      {title}
+      {title[astroI18n.langCode]}
     </h4>
     <!-- {withDescription ? <p class="text-black/70 leading-relaxed tracking-wide md:max-w-xl">
       Accessing key metrics and managing critical settings doesn’t have to be limited to your laptop or PC. You can now take your MailerSend account on the go with the new iOS app!

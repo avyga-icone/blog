@@ -2,5 +2,11 @@
   "home": "Acceuil",
   "show-all": "Afficher tout",
   "articles": "Articles",
-  "talk-to-us": "Parle-nous"
+  "talk-to-us": "Parle-nous",
+  "footer": {
+    "about": "A propos",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "rights": "Tous les droits sont réservés."
+  }
 }

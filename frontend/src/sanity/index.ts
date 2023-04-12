@@ -21,14 +21,36 @@ export type Post = {
     _type: 'localeBlockContent',
     fr: Array<any>
   },
-  bio: string;
-  categories: { slug: string, title:  string}[],
+  bio: {
+    _type: 'localeText',
+    en: string,
+    fr: string
+  };
+  categories: { 
+    slug: string, 
+    title: {
+      _type: 'localeString',
+      en: string,
+      fr: string
+    }
+  }[],
   intro: string,
   mainImage: Image,
   publishedAt: string,
   slug: string,
-  tags: { slug: string, title: string }[],
-  title: string
+  tags: { 
+    slug: string, 
+    title: {
+      _type: 'localeString',
+      en: string,
+      fr: string
+    }
+  }[],
+  title:  {
+    _type: 'localeString',
+    en: string,
+    fr: string
+  }
 }
 
 export type PostAndRecommend = {
@@ -42,12 +64,30 @@ export type PostAndRecommend = {
     _type: 'localeBlockContent',
     fr: Array<any>
   },
-  categories: { slug: string, title:  string}[],
+  categories: { 
+    slug: string, 
+    title: {
+      _type: 'localeString',
+      en: string,
+      fr: string
+    }
+  }[],
   intro: string,
   mainImage: Image,
   publishedAt: string,
   slug: string,
-  tags: { slug: string, title: string }[],
-  title: string
+  tags: { 
+    slug: string, 
+    title:  {
+      _type: 'localeString',
+      en: string,
+      fr: string
+    }
+  }[],
+  title: {
+    _type: 'localeString',
+    en: string,
+    fr: string
+  }
   recommended: Post[]
 }

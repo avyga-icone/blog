@@ -6,7 +6,7 @@ import { astroI18n, t } from "astro-i18n"
 import { useSanityClient } from 'astro-sanity';
 import { getAllPostForHomePaginated, Post } from '../sanity';
 astroI18n.init(Astro)
-// astroI18n.
+
 const posts = await useSanityClient().fetch(getAllPostForHomePaginated) as Post[];
 ---
 <Layout
@@ -18,7 +18,7 @@ description={SITE_DESCRIPTION}
 			<div class="2xl:px-20">
 				<h1 class="font-bold text-2xl md:text-3xl lg:text-5xl text-gray-900 dark:text-gray-100">Avyga blog</h1>
 				<nav class="flex flex-wrap mt-4 md:mt-6">
-					<a href="/" class="border-2 rounded-md tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 dark:bg-gray-700 bg-opacity-75 border-transparent text-black dark:text-gray-100">{t('index.new-post')}</a>
+					<a href={'/'} class="border-2 rounded-md tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 dark:bg-gray-700 bg-opacity-75 border-transparent text-black dark:text-gray-100">{t('index.new-post')}</a>
 					<!-- <a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
 						New features and updates
 					</a>

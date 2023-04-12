@@ -37,7 +37,7 @@ const { post } = Astro.props;
 					</a>
 				</span>
 				<h1 class="font-semibold tracking-tight leading-none text-3xl md:text-5xl text-gray-900 dark:text-gray-100">
-					{post.title}
+					{post.title[astroI18n.langCode]}
 				</h1>
 				<div class="flex flex-wrap gap-2.5 mt-6 items-center text-gray-700 dark:text-gray-300">
 					<div class="flex items-center space-x-2">
@@ -49,7 +49,7 @@ const { post } = Astro.props;
 					<span>·</span> -->
 					<span>
 						<a href="#" class="hover:underline">
-							{post.categories[0].title}
+							{post.categories[0].title[astroI18n.langCode]}
 						</a>
 					</span>
 					<span>·</span>
@@ -78,9 +78,12 @@ const { post } = Astro.props;
 				<div class="xl:col-span-5 lg:col-span-6">
 					<div class="bard text-lg text-gray-600 dark:text-gray-200">
 						<div class="intro">
-							{post?.intro}
+							{post?.intro[astroI18n.langCode]}
 						</div>
-						<div set:html={sanityPortableText(post.body.fr)} class="prose lg:prose-xl dark:prose-invert"/>
+						<div 
+						set:html={sanityPortableText(post.body[astroI18n.langCode])} 
+						class="prose lg:prose-xl dark:prose-invert"
+						/>
 
 						<div class="rounded-md bg-primary-100">
 
@@ -93,7 +96,7 @@ const { post } = Astro.props;
 								<div class="text-base">
 									<b class="block mb-2 text-lg text-gray-900 dark:text-gray-100">{post.author.name}</b>
 									<div class="pb-2 text-gray-700 dark:text-gray-200">
-										{post.author.bio}
+										{post.author.bio[astroI18n.langCode]}
 									</div>
 								</div>
 							</div>
