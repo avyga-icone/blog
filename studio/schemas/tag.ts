@@ -8,7 +8,7 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
     }),
     defineField({
       name: 'slug',
@@ -20,4 +20,9 @@ export default defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'title.en',
+    },
+  },
 })

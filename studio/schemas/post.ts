@@ -8,7 +8,7 @@ export default defineType({
     defineField({
       name: 'title',
       title: 'Title',
-      type: 'string',
+      type: 'localeString',
       validation: Rule => Rule.required()
     }),
     defineField({
@@ -16,7 +16,7 @@ export default defineType({
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'title.en',
         maxLength: 96,
       },
       validation: Rule => Rule.required()
@@ -57,7 +57,7 @@ export default defineType({
     defineField({
       name: 'intro',
       title: 'Intro',
-      type: 'text',
+      type: 'localeText',
       validation: Rule => Rule.required()
     }),
     defineField({
@@ -70,7 +70,7 @@ export default defineType({
 
   preview: {
     select: {
-      title: 'title',
+      title: 'title.en',
       author: 'author.name',
       media: 'mainImage',
     },

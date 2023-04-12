@@ -33,7 +33,7 @@ export default defineType({
     defineField({
       name: 'bio',
       title: 'Bio',
-      type: 'text',
+      type: 'localeText',
       validation: Rule => Rule.required()
     }),
   ],

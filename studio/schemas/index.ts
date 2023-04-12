@@ -4,6 +4,8 @@ import category from './category'
 import tag from './tag'
 import post from './post'
 import author from './author'
+import localeString from './locale/localeString'
+import localeText from './locale/localeText'
 
 export const schemaTypes = [
   post, 
@@ -11,5 +13,7 @@ export const schemaTypes = [
   category, 
   tag,
   blockContent,
+  localeString,
+  localeText,
   localeblockContent
 ]
