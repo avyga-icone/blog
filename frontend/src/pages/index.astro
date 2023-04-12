@@ -6,7 +6,7 @@ import { astroI18n, t } from "astro-i18n"
 import { useSanityClient } from 'astro-sanity';
 import { getAllPostForHomePaginated, Post } from '../sanity';
 astroI18n.init(Astro)
-
+// astroI18n.
 const posts = await useSanityClient().fetch(getAllPostForHomePaginated) as Post[];
 ---
 <Layout
