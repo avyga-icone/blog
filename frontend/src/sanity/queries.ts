@@ -1,6 +1,6 @@
 import { groq } from 'astro-sanity';
 
-export const getAllPostForHome = groq`*[_type == "post"]{
+export const getAllPostForHome = groq`*[_type == "post" && dateTime(publishedAt) <= dateTime(now())] | order(publishedAt desc){
 	title,
 	"slug": slug.current,
 	mainImage,
@@ -11,7 +11,7 @@ export const getAllPostForHome = groq`*[_type == "post"]{
 	},
 }`;
 
-export const getAllPostForHomePaginated = groq`*[_type == "post"]{
+export const getAllPostForHomePaginated = groq`*[_type == "post" && dateTime(publishedAt) <= dateTime(now())] | order(publishedAt desc) {
 	title,
 	"slug": slug.current,
 	mainImage,
@@ -20,10 +20,10 @@ export const getAllPostForHomePaginated = groq`*[_type == "post"]{
 		title,
 		"slug": slug.current
 	},
-}[0...6]`;
+}[0...7]`;
 
 
-export const getAllPostAndRecommended = groq`*[_type == "post"]{
+export const getAllPostAndRecommended = groq`*[_type == "post" && dateTime(publishedAt) <= dateTime(now())]{
 	title,
 	"slug": slug.current,
 	mainImage,
@@ -48,6 +48,7 @@ export const getAllPostAndRecommended = groq`*[_type == "post"]{
 		_type == "post" 
 		&& categories[0]->{'slug': slug.current}.slug == ^.categories[0]->{ 'slug': slug.current }.slug
 		&& slug.current != ^.slug.current
+		&& dateTime(publishedAt) <= dateTime(now())
 	]{
 		title,
 		"slug": slug.current,

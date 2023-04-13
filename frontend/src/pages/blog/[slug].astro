@@ -26,7 +26,11 @@ const { post } = Astro.props;
 
 ---
 
-<Layout description="" title="">
+<Layout 
+description={post?.intro[astroI18n.langCode]} 
+title={post.title[astroI18n.langCode]}
+image={urlForImage(post.mainImage).width(970).height(500).url()}
+>
 	<section class="my-10 md:my-20 lg:mb-28 ">
 		<div class="container mx-auto w-full px-7">
 			<div class="2xl:px-20">

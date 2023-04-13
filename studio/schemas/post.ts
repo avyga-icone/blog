@@ -79,4 +79,7 @@ export default defineType({
       return {...selection, subtitle: author && `by ${author}`}
     },
   },
+  initialValue: () => ({
+    publishedAt: (new Date()).toISOString()
+  })
 })
