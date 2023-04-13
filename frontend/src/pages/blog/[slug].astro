@@ -29,7 +29,7 @@ const { post } = Astro.props;
 <Layout 
 description={post?.intro[astroI18n.langCode]} 
 title={post.title[astroI18n.langCode]}
-image={urlForImage(post.mainImage).width(970).height(500).url()}
+image={urlForImage(post.mainImage).url()}
 >
 	<section class="my-10 md:my-20 lg:mb-28 ">
 		<div class="container mx-auto w-full px-7">
@@ -65,11 +65,17 @@ image={urlForImage(post.mainImage).width(970).height(500).url()}
 	<section class="mb-16 -mt-4">
 		<div class="container mx-auto w-full px-7">
 			<div class="2xl:px-20">
-				<img src={urlForImage(post.mainImage).width(970).height(450).url()}
-				width="2048"
-				height="1536"
-				class="w-full rounded-lg max-w-full h-auto"
-				alt="">
+				<picture>
+					<source
+						srcset={urlForImage(post.mainImage).format('webp').url()}
+						type="image/webp"
+					/>
+					<img
+						class="responsive__img w-full rounded-lg max-w-full h-auto"
+						src={urlForImage(post.mainImage).url()}
+						alt="${value.alt}"
+					/>
+				</picture>
 			</div>
 		</div>
 	</section>

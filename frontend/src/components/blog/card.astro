@@ -18,10 +18,17 @@ const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
 ---
 <div class="relative">
   <a href={`/blog/${slug}`} class="relative">
-    <img 
-    src={urlForImage(image).width(970).height(450).url()} 
-    alt={`Post poster`} 
-    class="rounded-lg mb-0 object-cover w-full h-96">
+    <picture>
+      <source
+        srcset={urlForImage(image).format('webp').url()}
+        type="image/webp"
+      />
+      <img
+        class="responsive__img rounded-lg mb-0 object-cover w-full h-96"
+        src={urlForImage(image).url()}
+        alt="${value.alt}"
+      />
+    </picture>
     <div class="absolute bottom-4 left-4">
       <div class="border border-white rounded-xl px-2 py-0.5 text-sm text-white font-bold " 
       style="max-width: 220px;">
