@@ -4,10 +4,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import BlogCard from '../components/blog/card.astro';
 import { astroI18n, t } from "astro-i18n"
 import { useSanityClient } from 'astro-sanity';
-import { getAllPostForHomePaginated, Post } from '../sanity';
+import { getAllPostForHomePaginated, getCateogriesPaginated, Post, Category } from '../sanity';
 astroI18n.init(Astro)
 
 const posts = await useSanityClient().fetch(getAllPostForHomePaginated) as Post[];
+const categories = await useSanityClient().fetch(getCateogriesPaginated) as Category[];
 ---
 <Layout
 title={SITE_TITLE} 
@@ -19,12 +20,11 @@ description={SITE_DESCRIPTION}
 				<h1 class="font-bold text-2xl md:text-3xl lg:text-5xl text-gray-900 dark:text-gray-100">Avyga blog</h1>
 				<nav class="flex flex-wrap mt-4 md:mt-6">
 					<a href={'/'} class="border-2 rounded-md tracking-wide px-4 py-2 mr-2 mb-2  bg-gray-200 dark:bg-gray-700 bg-opacity-75 border-transparent text-black dark:text-gray-100">{t('index.new-post')}</a>
-					<!-- <a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
-						New features and updates
-					</a>
-					<a href="/" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
-						Tips and resources
-					</a> -->
+					{categories.map((category) => (
+						<a href="#" class="border-2 rounded-md text-black dark:text-gray-100 tracking-wide px-4 py-2 mr-2 mb-2  border-gray-200 text-opacity-75 hover:text-opacity-100 hover:border-gray-300 ">
+							{category.title[astroI18n.langCode]}
+						</a>
+					))}
 				</nav>
 			</div>
 		</div>
@@ -53,9 +53,9 @@ description={SITE_DESCRIPTION}
 	</section>
 
 	<div class="mt-12 pb-8 flex items-center justify-center w-full">
-		{posts.length > 6 ? <a href="/pages/2" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-600 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+		<!-- {posts.length > 6 ? <a href="/pages/2" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 dark:bg-gray-700 dark:text-white dark:border-gray-600 rounded-lg hover:bg-gray-100 hover:text-gray-700">
 			{t('index.next')}
 			<svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-		</a>: null}
+		</a>: null} -->
 	</div>
 </Layout>

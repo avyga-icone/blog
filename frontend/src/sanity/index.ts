@@ -10,6 +10,25 @@ export type Image = {
   }
 };
 
+export type Category = {
+  slug: string, 
+  title: {
+    _type: 'localeString',
+    en: string,
+    fr: string
+  }
+}
+
+export type Tag = {
+  slug: string, 
+  title: {
+    _type: 'localeString',
+    en: string,
+    fr: string
+  }
+}
+
+
 export type Post = {
   author: {
     image: Image,
@@ -26,26 +45,12 @@ export type Post = {
     en: string,
     fr: string
   };
-  categories: { 
-    slug: string, 
-    title: {
-      _type: 'localeString',
-      en: string,
-      fr: string
-    }
-  }[],
+  categories: Category[],
   intro: string,
   mainImage: Image,
   publishedAt: string,
   slug: string,
-  tags: { 
-    slug: string, 
-    title: {
-      _type: 'localeString',
-      en: string,
-      fr: string
-    }
-  }[],
+  tags: Tag[],
   title:  {
     _type: 'localeString',
     en: string,
@@ -64,26 +69,12 @@ export type PostAndRecommend = {
     _type: 'localeBlockContent',
     fr: Array<any>
   },
-  categories: { 
-    slug: string, 
-    title: {
-      _type: 'localeString',
-      en: string,
-      fr: string
-    }
-  }[],
+  categories: Category[],
   intro: string,
   mainImage: Image,
   publishedAt: string,
   slug: string,
-  tags: { 
-    slug: string, 
-    title:  {
-      _type: 'localeString',
-      en: string,
-      fr: string
-    }
-  }[],
+  tags: Tag[],
   title: {
     _type: 'localeString',
     en: string,
