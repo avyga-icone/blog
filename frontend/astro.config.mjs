@@ -13,7 +13,7 @@ export default defineConfig({
     tailwind(), 
     sanity({
       projectId: '7bqqhdtu',
-      dataset: 'developement',
+      dataset: import.meta.env.DEV ? 'developement': 'production',
       apiVersion: '2023-03-01',
       useCdn: false
     }), 
