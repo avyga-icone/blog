@@ -54,9 +54,9 @@ const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
        <span>·</span>
        <span>{category[astroI18n.langCode]}</span>
     </div>
-    <h4 class="mb-1.5 group-hover:underline text-2xl font-semibold tracking-tight leading-tight">
+    <a href={`/blog/${slug}`} class="mb-1.5 group-hover:underline text-2xl font-semibold tracking-tight leading-tight">
       {title[astroI18n.langCode]}
-    </h4>
+    </a>
     <!-- {withDescription ? <p class="text-black/70 leading-relaxed tracking-wide md:max-w-xl">
       Accessing key metrics and managing critical settings doesn’t have to be limited to your laptop or PC. You can now take your MailerSend account on the go with the new iOS app!
     </p>: null} -->

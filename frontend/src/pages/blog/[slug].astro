@@ -100,7 +100,7 @@ image={urlForImage(post.mainImage).url()}
 						</div>
 					</div>
 					<div>
-						<div class="py-10 border-t-2 border-b-2 mt-8">
+						<div class="py-10 border-t-2 border-b-2 mt-8 mb-4">
 							<div class="flex flex-col md:flex-row gap-6">
 								<img src={urlForImage(post.author.image).width(96).height(96).url()} class="rounded-lg w-24 h-24" alt="">
 								<div class="text-base">
@@ -114,7 +114,7 @@ image={urlForImage(post.mainImage).url()}
 					</div>
 					{post?.recommended?.length > 0 ? 
 					<div>
-						<div class="flex justify-between mt-20 mb-12 text-gray-800 dark:text-gray-200">
+						<div class="flex justify-between mt-20 mb-8 text-gray-800 dark:text-gray-200">
 							<h2 class="mb-0">Next up in Blog</h2>
 							<a href="/" class="flex items-center hover:underline">
 								{t('show-all')}
