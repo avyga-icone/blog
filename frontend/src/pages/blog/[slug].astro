@@ -67,13 +67,15 @@ image={urlForImage(post.mainImage).url()}
 			<div class="2xl:px-20">
 				<picture>
 					<source
-						srcset={urlForImage(post.mainImage).format('webp').url()}
+						srcset={urlForImage(post.mainImage).height(600).format('webp').url()}
 						type="image/webp"
 					/>
 					<img
+						width="700"
+						height="600"
 						class="responsive__img w-full rounded-lg max-w-full h-auto"
-						src={urlForImage(post.mainImage).url()}
-						alt="${value.alt}"
+						src={urlForImage(post.mainImage).height(600).url()}
+						alt={post.title[astroI18n.langCode]}
 					/>
 				</picture>
 			</div>
