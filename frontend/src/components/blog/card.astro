@@ -1,6 +1,6 @@
 ---
 
-import { Image, Post } from '../../sanity';
+import type { Image, Post } from '../../sanity';
 import { urlForImage } from '../../sanity/urlForImage'
 import dayjs from 'dayjs';
 import { astroI18n } from "astro-i18n"
@@ -33,7 +33,7 @@ const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
       <div class="border border-white rounded-xl px-2 py-0.5 text-sm text-white font-bold " 
       style="max-width: 220px;">
         <span class="mr-0.5">·</span>
-        {category[astroI18n.langCode]}
+        {category[astroI18n.locale]}
       </div>
       <div class="bg-white rounded-xl px-1.5 py-0.5 text-sm mt-3 font-bold w-fit">
         {dayjs(publishDate).format('MMM DD, YYYY')}
@@ -52,10 +52,10 @@ const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
   <div class="mt-4 text-gray-900 dark:text-gray-100">
     <div class="mb-1.5 text-sm space-x-1 font-bold">
        <span>·</span>
-       <span>{category[astroI18n.langCode]}</span>
+       <span>{category[astroI18n.locale]}</span>
     </div>
     <a href={`/blog/${slug}`} class="mb-1.5 group-hover:underline text-2xl font-semibold tracking-tight leading-tight">
-      {title[astroI18n.langCode]}
+      {title[astroI18n.locale]}
     </a>
     <!-- {withDescription ? <p class="text-black/70 leading-relaxed tracking-wide md:max-w-xl">
       Accessing key metrics and managing critical settings doesn’t have to be limited to your laptop or PC. You can now take your MailerSend account on the go with the new iOS app!

@@ -1,15 +1,15 @@
 ---
 import Layout from '../../layouts/MainLayout.astro';
 import BlogCard from '../../components/blog/card.astro';
-import { useSanityClient } from 'astro-sanity';
-import { urlForImage, sanityPortableText, PostAndRecommend, getAllPostAndRecommended } from '../../sanity';
+import { sanityClient } from "sanity:client";
+import { urlForImage, type PostAndRecommend, getAllPostAndRecommended } from '../../sanity';
 import Avatar from '../../components/avatar.astro';
 import { astroI18n, t } from "astro-i18n";
-astroI18n.init(Astro)
 import dayjs from 'dayjs';
+import PortableText from '../../components/PortableText.astro';
 
 export async function getStaticPaths() {
-  const posts = await useSanityClient().fetch(getAllPostAndRecommended);
+  const posts = await sanityClient.fetch<PostAndRecommend[]>(getAllPostAndRecommended);
 
   return posts.map((post) => {
     return {
@@ -27,8 +27,8 @@ const { post } = Astro.props;
 ---
 
 <Layout 
-description={post?.intro[astroI18n.langCode]} 
-title={post.title[astroI18n.langCode]}
+description={post?.intro[astroI18n.locale]} 
+title={post.title[astroI18n.locale]}
 image={urlForImage(post.mainImage).url()}
 >
 	<section class="my-10 md:my-20 lg:mb-28 ">
@@ -41,7 +41,7 @@ image={urlForImage(post.mainImage).url()}
 					</a>
 				</span>
 				<h1 class="font-semibold tracking-tight leading-none text-3xl md:text-5xl text-gray-900 dark:text-gray-100">
-					{post.title[astroI18n.langCode]}
+					{post.title[astroI18n.locale]}
 				</h1>
 				<div class="flex flex-wrap gap-2.5 mt-6 items-center text-gray-700 dark:text-gray-300">
 					<div class="flex items-center space-x-2">
@@ -53,7 +53,7 @@ image={urlForImage(post.mainImage).url()}
 					<span>·</span> -->
 					<span>
 						<a href="#" class="hover:underline">
-							{post.categories[0].title[astroI18n.langCode]}
+							{post.categories[0].title[astroI18n.locale]}
 						</a>
 					</span>
 					<span>·</span>
@@ -75,7 +75,7 @@ image={urlForImage(post.mainImage).url()}
 						height="600"
 						class="responsive__img w-full rounded-lg max-w-full h-auto"
 						src={urlForImage(post.mainImage).height(600).url()}
-						alt={post.title[astroI18n.langCode]}
+						alt={post.title[astroI18n.locale]}
 					/>
 				</picture>
 			</div>
@@ -90,12 +90,13 @@ image={urlForImage(post.mainImage).url()}
 				<div class="xl:col-span-5 lg:col-span-6">
 					<div class="bard text-lg text-gray-600 dark:text-gray-200">
 						<div class="intro">
-							{post?.intro[astroI18n.langCode]}
+							{post?.intro[astroI18n.locale]}
 						</div>
-						<div 
-						set:html={sanityPortableText(post.body[astroI18n.langCode])} 
+						<!-- <div 
+						set:html={sanityPortableText(post.body[astroI18n.locale])} 
 						class="prose lg:prose-xl dark:prose-invert"
-						/>
+						/> -->
+						<PortableText value={post.body[astroI18n.locale]}/>
 
 						<div class="rounded-md bg-primary-100">
 
@@ -108,7 +109,7 @@ image={urlForImage(post.mainImage).url()}
 								<div class="text-base">
 									<b class="block mb-2 text-lg text-gray-900 dark:text-gray-100">{post.author.name}</b>
 									<div class="pb-2 text-gray-700 dark:text-gray-200">
-										{post.author.bio[astroI18n.langCode]}
+										{post.author.bio[astroI18n.locale]}
 									</div>
 								</div>
 							</div>

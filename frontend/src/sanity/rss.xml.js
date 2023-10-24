@@ -1,10 +1,10 @@
 import rss from '@astrojs/rss';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { useSanityClient } from 'astro-sanity';
-import { getAllPostForRss  } from '../sanity';
+import { sanityClient } from "sanity:client";
+import { getAllPostForRss } from '.';
 
-export async function get(context) {
-  const posts = await useSanityClient().fetch(getAllPostForRss);
+export async function GET(context) {
+  const posts = await sanityClient.fetch(getAllPostForRss);
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,

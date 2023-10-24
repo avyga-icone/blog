@@ -1,11 +1,9 @@
-import { groq } from 'astro-sanity';
-
-export const getCateogriesPaginated = groq`*[_type == "category"]{
+export const getCateogriesPaginated = `*[_type == "category"]{
 	title,
 	"slug": slug.current
 }[0...5]`
 
-export const getAllPostForHome = groq`*[_type == "post" && dateTime(publishedAt) <= dateTime(now())] | order(publishedAt desc){
+export const getAllPostForHome = `*[_type == "post" && dateTime(publishedAt) <= dateTime(now())] | order(publishedAt desc){
 	title,
 	"slug": slug.current,
 	mainImage,
@@ -16,7 +14,7 @@ export const getAllPostForHome = groq`*[_type == "post" && dateTime(publishedAt)
 	},
 }`;
 
-export const getAllPostForRss = groq`*[
+export const getAllPostForRss = `*[
 	_type == "post" 
 	&& dateTime(publishedAt) <= dateTime(now())
 	&& title.fr != null
@@ -27,7 +25,7 @@ export const getAllPostForRss = groq`*[
 	"slug": slug.current
 }`;
 
-export const getAllPostForHomePaginated = groq`*[_type == "post" && dateTime(publishedAt) <= dateTime(now())] | order(publishedAt desc) {
+export const getAllPostForHomePaginated = `*[_type == "post" && dateTime(publishedAt) <= dateTime(now())] | order(publishedAt desc) {
 	title,
 	"slug": slug.current,
 	mainImage,
@@ -39,7 +37,7 @@ export const getAllPostForHomePaginated = groq`*[_type == "post" && dateTime(pub
 }[0...7]`;
 
 
-export const getAllPostAndRecommended = groq`*[_type == "post" && dateTime(publishedAt) <= dateTime(now())]{
+export const getAllPostAndRecommended = `*[_type == "post" && dateTime(publishedAt) <= dateTime(now())]{
 	title,
 	"slug": slug.current,
 	mainImage,

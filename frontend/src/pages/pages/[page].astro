@@ -3,12 +3,11 @@ import Layout from '../../layouts/MainLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import BlogCard from '../../components/blog/card.astro';
 import { astroI18n, t } from "astro-i18n"
-import { useSanityClient } from 'astro-sanity';
-import { getAllPostForHome, Post } from '../../sanity';
-astroI18n.init(Astro)
+import { sanityClient } from "sanity:client";
+import { getAllPostForHome, type Post } from '../../sanity';
 
 export async function getStaticPaths({ paginate }) {
-  const posts = await useSanityClient().fetch(getAllPostForHome) as Post[];
+  const posts = await sanityClient.fetch<Post[]>(getAllPostForHome);
   // Generate pages from our array of astronauts, with 2 to a page
   return paginate(posts, { pageSize: 6 });
 }
