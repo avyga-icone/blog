@@ -1,0 +1,64 @@
+---
+
+import type { Image, Post } from '../../sanity';
+import { urlForImage } from '../../sanity/urlForImage'
+import dayjs from 'dayjs';
+import { astroI18n } from "astro-i18n"
+export interface Props {
+	image: Image | string;
+  title: Post['title'];
+  slug: string;
+  category: Post['categories'][0]['title'];
+  categorySlug?: string;
+  publishDate: string;
+}
+
+
+const { image, title, slug ,category, categorySlug, publishDate } = Astro.props;
+---
+<div class="relative">
+  <a href={`/blog/${slug}`} class="relative">
+    <picture>
+      <source
+        srcset={urlForImage(image).format('webp').url()}
+        type="image/webp"
+      />
+      <img
+        class="responsive__img rounded-lg mb-0 object-cover w-full h-96"
+        src={urlForImage(image).url()}
+        alt="${value.alt}"
+      />
+    </picture>
+    <div class="absolute bottom-4 left-4">
+      <div class="border border-white rounded-xl px-2 py-0.5 text-sm text-white font-bold " 
+      style="max-width: 220px;">
+        <span class="mr-0.5">·</span>
+        {category[astroI18n.locale]}
+      </div>
+      <div class="bg-white rounded-xl px-1.5 py-0.5 text-sm mt-3 font-bold w-fit">
+        {dayjs(publishDate).format('MMM DD, YYYY')}
+      </div>
+    </div>
+    <!-- <div class="absolute top-4 left-4  max-w-xs leading-none font-bold text-xl">
+      <p class="inline-block clear-both float-left bg-white px-2 rounded-t-md rounded-br-md">Hey Siri: Download the new</p>
+      <p class="inline-block clear-both float-left bg-white px-2 rounded-b-md">MailerSend iOS app!</p>
+      <span class="bg-white px-2 rounded-md">Hey Siri: Download the new </span><br/>
+      <span class="bg-white px-2 rounded-md">MailerSend iOS app!</span>
+    </div> -->
+  </a>
+  <div class="absolute top-3 right-4 bg-white rounded-full p-1">
+    <svg width="26px" height="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000000"><path fill-rule="evenodd" d="M18.25 15.5a.75.75 0 00.75-.75v-9a.75.75 0 00-.75-.75h-9a.75.75 0 000 1.5h7.19L6.22 16.72a.75.75 0 101.06 1.06L17.5 7.56v7.19c0 .414.336.75.75.75z"></path></svg>
+  </div>
+  <div class="mt-4 text-gray-900 dark:text-gray-100">
+    <div class="mb-1.5 text-sm space-x-1 font-bold">
+       <span>·</span>
+       <span>{category[astroI18n.locale]}</span>
+    </div>
+    <a href={`/blog/${slug}`} class="mb-1.5 group-hover:underline text-2xl font-semibold tracking-tight leading-tight">
+      {title[astroI18n.locale]}
+    </a>
+    <!-- {withDescription ? <p class="text-black/70 leading-relaxed tracking-wide md:max-w-xl">
+      Accessing key metrics and managing critical settings doesn’t have to be limited to your laptop or PC. You can now take your MailerSend account on the go with the new iOS app!
+    </p>: null} -->
+  </div>
+</div>

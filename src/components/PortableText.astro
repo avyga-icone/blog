@@ -1,0 +1,17 @@
+---
+import SanityImage from './SanityImage.astro';
+import {PortableText as PortableTextInternal} from "astro-portabletext"
+
+const components = {
+  type: {
+    image: SanityImage,
+  },
+};
+---
+
+<PortableTextInternal 
+class={"prose lg:prose-xl dark:prose-invert"} 
+value={Astro.props.value} 
+components={components} 
+/>
+

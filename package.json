@@ -1,0 +1,40 @@
+{
+	"name": "avyga-blog",
+	"type": "module",
+	"version": "0.0.1",
+	"license": "UNLICENSED",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"i18n:sync": "npm run i18n:generate:pages && npm run i18n:generate:types",
+		"i18n:extract": "astro-i18n extract",
+		"i18n:generate:pages": "astro-i18n generate:pages --purge",
+		"i18n:generate:types": "astro-i18n generate:types"
+	},
+	"dependencies": {
+		"@astrojs/netlify": "^3.0.3",
+		"@astrojs/react": "^3.0.3",
+		"@astrojs/rss": "^3.0.0",
+		"@astrojs/sitemap": "^3.0.2",
+		"@astrojs/tailwind": "^5.0.2",
+		"@sanity/astro": "^2.1.0",
+		"@sanity/client": "^6.7.0",
+		"@sanity/image-url": "^1.0.2",
+		"@sanity/vision": "^3.18.1",
+		"astro": "^3.3.3",
+		"astro-i18n": "^2.1.18",
+		"astro-portabletext": "^0.9.6",
+		"dayjs": "^1.11.7",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"sanity": "*",
+		"tailwindcss": "^3.3.3"
+	},
+	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.9",
+		"@types/react": "^18.2.31",
+		"@types/react-dom": "^18.2.14"
+	}
+}
