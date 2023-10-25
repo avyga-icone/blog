@@ -2,7 +2,7 @@
 import Layout from '../../layouts/MainLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import BlogCard from '../../components/blog/card.astro';
-import { astroI18n, t } from "astro-i18n"
+import { t } from "astro-i18n"
 import { sanityClient } from "sanity:client";
 import { getAllPostForHome, type Post } from '../../sanity';
 

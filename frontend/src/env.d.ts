@@ -10,7 +10,7 @@ type SecondaryLocale = "en"
 type Locale = PrimaryLocale | SecondaryLocale
 type RouteParameters = {"/404":undefined;"/":undefined;"/blog/[slug]":{"slug":unknown;};"/pages/[page]":{"page":unknown;};}
 type Route = keyof RouteParameters
-type TranslationVariables = {"404.index":object|undefined;"404.message":object|undefined;"404.back":object|undefined;"{route}":object|undefined;"new-post":object|undefined;"next":object|undefined;"prev":object|undefined;"home":object|undefined;"show-all":object|undefined;"articles":object|undefined;"talk-to-us":object|undefined;"footer.about":object|undefined;"footer.contact":object|undefined;"footer.privacy":object|undefined;"footer.rights":object|undefined;}
+type TranslationVariables = {"index":object|undefined;"message":object|undefined;"back":object|undefined;"{route}":object|undefined;"new_post":object|undefined;"next":object|undefined;"prev":object|undefined;"MMM DD, YYYY":object|undefined;"webp":object|undefined;"show-all":object|undefined;"index.prev":object|undefined;"index.nex":object|undefined;"home":object|undefined;"articles":object|undefined;"talk-to-us":object|undefined;"footer.about":object|undefined;"footer.contact":object|undefined;"footer.privacy":object|undefined;"footer.rights":object|undefined;}
 type Translation = keyof TranslationVariables
 type Environment = "none"|"node"|"browser"
 declare module "astro-i18n" {
