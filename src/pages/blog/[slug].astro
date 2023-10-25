@@ -11,19 +11,32 @@ import PortableText from '../../components/PortableText.astro';
 export async function getStaticPaths() {
   const posts = await sanityClient.fetch<PostAndRecommend[]>(getAllPostAndRecommended);
 
-  return posts.map((post) => {
+	const pathsFr =  posts.map((post) => {
     return {
       params: {
+				lang: 'fr',
         slug: post?.slug || '',
       },
       props: { post },
     };
   });
 
+	const pathsEn =  posts.map((post) => {
+    return {
+      params: {
+				lang: 'en',
+        slug: post?.slug || '',
+      },
+      props: { post },
+    };
+  });
+
+	return [...pathsFr, ...pathsEn];
 }
+
 type Props = { post: PostAndRecommend  }
 const { post } = Astro.props;
-
+// console.log(post, 'post')
 ---
 
 <Layout 

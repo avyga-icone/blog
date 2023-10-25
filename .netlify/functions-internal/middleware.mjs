@@ -1,14 +1,14 @@
 import './chunks/index_52ac59f2.mjs';
 export { onRequest } from './middleware2.mjs';
-import './chunks/prerender_686027da.mjs';
+import './chunks/prerender_303aa98a.mjs';
 import 'mime';
 import 'html-escaper';
 import 'clsx';
 import './chunks/astro_b84b25de.mjs';
 import 'cookie';
 import 'kleur/colors';
-import './chunks/pages/index_bd8b8ad3.mjs';
-/* empty css                                  */import '@sanity/client';
+import './chunks/pages/index_68ee45aa.mjs';
+/* empty css                                        */import '@sanity/client';
 /* empty css                                  */import '@sanity/image-url';
 import 'dayjs';
 import '@portabletext/toolkit';

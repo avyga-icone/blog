@@ -1,13 +1,13 @@
 import './chunks/index_52ac59f2.mjs';
-import { y as ys } from './chunks/prerender_686027da.mjs';
+import { y as ys } from './chunks/prerender_303aa98a.mjs';
 import 'mime';
 import 'html-escaper';
 import 'clsx';
 import './chunks/astro_b84b25de.mjs';
 import 'cookie';
 import 'kleur/colors';
-import './chunks/pages/index_bd8b8ad3.mjs';
-/* empty css                                  */import '@sanity/client';
+import './chunks/pages/index_68ee45aa.mjs';
+/* empty css                                        */import '@sanity/client';
 /* empty css                                  */import '@sanity/image-url';
 import 'dayjs';
 import '@portabletext/toolkit';
@@ -40,27 +40,7 @@ function defineMiddleware(fn) {
   return fn;
 }
 
-const astroI18n = ys({
-  primaryLocale: "fr",
-  // default app locale
-  secondaryLocales: ["en"],
-  // other supported locales
-  fallbackLocale: "fr",
-  // fallback locale (on missing translation)
-  trailingSlash: "never",
-  // "never" or "always"
-  run: "client+server",
-  // "client+server" or "server"
-  showPrimaryLocale: false,
-  // "/en/about" vs "/about"
-  translationLoadingRules: [],
-  // per page group loading
-  translationDirectory: {},
-  // translation directory names
-  translations: {},
-  // { [translation_group1]: { [locale1]: {}, ... } }
-  routes: {}
-});
+const astroI18n = ys();
 const onRequest = sequence(astroI18n);
 
 export { onRequest };
