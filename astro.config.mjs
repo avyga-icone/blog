@@ -3,9 +3,9 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import sanity from "@sanity/astro";
 import react from "@astrojs/react";
-
-// const isDev = import.meta.env.DEV;
 import netlify from "@astrojs/netlify/functions";
+
+const devPlugin = [react()]
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,9 +18,9 @@ export default defineConfig({
       projectId: '7bqqhdtu',
       dataset: import.meta.env.DEV ? 'developement' : 'production',
       useCdn: false,
-      studioBasePath: "/admin"
+      studioBasePath: import.meta.env.DEV ? "/admin" : undefined
     }),
-    react(),
+    ...(import.meta.env.DEV ? devPlugin : []),
   ],
   adapter: netlify()
 });
